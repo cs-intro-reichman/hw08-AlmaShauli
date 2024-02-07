@@ -58,10 +58,11 @@ class PlayList {
     public String toString() {
         //// replace the following statement with your code
 
+        String str;
         for (int i = 0; i < size; i++) {
-
+            str += tracks[i].toString() + "\n";
         }
-        return "";
+        return srt;
     }
 
     /**
@@ -207,7 +208,7 @@ class PlayList {
             return -1;
         } else {
             int min = tracks[start].getDuration();
-            int indexMin = 0;
+            int indexMin = start;
             for (int i = start; i < size; i++) {
                 if (tracks[i].getDuration() < min) {
                     min = tracks[i].getDuration();
