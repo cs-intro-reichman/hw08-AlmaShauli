@@ -60,7 +60,9 @@ class PlayList {
 
         String str = "";
         for (int i = 0; i < size; i++) {
-            str += tracks[i].toString() + "\n";
+            if (tracks[i] != null) {
+                str += tracks[i].toString() + "\n";
+            }
         }
         return str;
     }
@@ -113,13 +115,13 @@ class PlayList {
     public boolean add(int i, Track track) {
         //// replace the following statement with your code
 
-        if (i < 0 || i > size - 1 || size == maxSize) {
+        if (i < 0 || i >= maxSize || size == maxSize) {
             return false;
         } else {
             if (size == 0) {
                 tracks[0] = track;
             } else {
-                for (int j = size - 1; j >= 0; j--) {
+                for (int j = size; j >= 0; j--) {
                     if (j >= i) {
                         tracks[j + 1] = tracks[j];
                     }
@@ -128,6 +130,7 @@ class PlayList {
                     }
                 }
             }
+            size++;
             return true;
         }
     }
@@ -141,11 +144,11 @@ class PlayList {
     public void remove(int i) {
         //// replace this comment with your code
         if (tracks.length != 0 && i >= 0 && i < size) {
-            tracks[i] = null;
             for (int j = i; j < size - 1; j++) {
                 tracks[j] = tracks[j + 1];
             }
             size--;
+            tracks[size] = null;
         }
     }
 
@@ -156,12 +159,13 @@ class PlayList {
      */
     public void remove(String title) {
         //// replace this comment with your code
+        int index = 0;
         for (int i = 0; i < size; i++) {
             if (title.equals(tracks[i].getTitle())) {
-                tracks[i] = tracks[i + 1];
+                index = i;
             }
         }
-        size--;
+        remove(index);
     }
 
     /**
@@ -170,10 +174,7 @@ class PlayList {
     public void removeFirst() {
         //// replace this comment with your code
         if (tracks.length != 0) {
-            for (int i = 0; i < size; i++) {
-                tracks[i] = tracks[i + 1];
-            }
-            size--;
+            remove(0);
         }
     }
 
@@ -191,6 +192,7 @@ class PlayList {
                 this.tracks[i] = other.getTrack(index);
                 index++;
             }
+            size += other.getSize();
         }
     }
 
