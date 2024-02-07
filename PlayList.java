@@ -58,11 +58,11 @@ class PlayList {
     public String toString() {
         //// replace the following statement with your code
 
-        String str;
+        String str = "";
         for (int i = 0; i < size; i++) {
             str += tracks[i].toString() + "\n";
         }
-        return srt;
+        return str;
     }
 
     /**
